@@ -1,0 +1,1 @@
+this is a readme file for the task 0x00-python_variable_annotations for the alx software engnerring program which consists of 10 mandatory tasks and 3 advanced as follows
