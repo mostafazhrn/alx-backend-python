@@ -5,8 +5,8 @@ from typing import List
 wait_random = __import__('0-basic_async_syntax').wait_random
 
 
-async def wait_n(n: int, max_delay: int) -> float:
-    """ This function shall take an integer and return a float"""
+async def wait_n(n: int, max_delay: int) -> List[float]:
+    """ This function shall lst all delays of a rand float"""
     delays: List[float] = []
     all_del: List[float] = []
     for x in range(n):
