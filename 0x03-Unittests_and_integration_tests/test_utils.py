@@ -29,6 +29,7 @@ class TestAccessNestedMap(TestCase):
             access_nested_map(nested_map, path)
         self.assertEqual(error.exception.args[0], path[-1])
 
+
 class TestGetJson(unittest.TestCase):
     """ This instance is a class for testing above func"""
     @parameterized.expand([
@@ -42,21 +43,22 @@ class TestGetJson(unittest.TestCase):
         valid_op = get_json(url)
         self.assertEqual(valid_op, payload)
 
+
 class TestMemoize(unittest.TestCase):
-    """ This instance is a class for testing the memoize func"""
+    """ This instance shall rep  a class for testing the memoize func"""
     def test_memoize(self):
-        """ This method is to test memoize """
+        """ This method shall be the test memoize """
         class TestClass:
-            """ This instance is a class for testing the memoize func"""
+            """ This instance shall rep class for testing the memoize func"""
             def a_method(self):
-                """ This method is to test memoize """
+                """ This method shall rep to test memoize """
                 return 42
 
             @memoize
             def a_property(self):
                 """ This method is to test memoize """
                 return self.a_method()
-        
+
         with patch.object(TestClass, 'a_method') as mock_method:
             class_preuba = TestClass()
             class_preuba.a_property
