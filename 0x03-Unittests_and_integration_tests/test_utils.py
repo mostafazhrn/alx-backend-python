@@ -25,6 +25,6 @@ class TestAccessNestedMap(TestCase):
     ])
     def test_access_nested_map_exception(self, nested_map, path, not_res):
         """ this method shall test access_nested_map exception """
-        with self.assertRaises(KeyError) as e:
+        with self.assertRaises(KeyError) as error:
             access_nested_map(nested_map, path)
-        self.assertEqual(not_res, str(e.exception))
+        self.assertEqual(error.exception.args[0], path[-1])
