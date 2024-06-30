@@ -29,3 +29,13 @@ class TestGithubOrgClient(unittest.TestCase):
             mock_pub.return_value = TEST_PAYLOAD
             valid_op = GithubOrgClient('google')
             self.assertEqual(valid_op._public_repos_url, TEST_PAYLOAD)
+
+    @patch('client.get_json', return_value=[{'name': 'google'}])
+    def test_public_repos(self, mock_get_json):
+        """ This method shall test public_repos """
+        valid_op = GithubOrgClient('google')
+        return_res = valid_op.public_repos()
+        self.assertEqual(return_res, ['google'])
+        mock_get_json.assert_called_once
+
+    @patch('client.get_json', side_effect=HTTPError())
