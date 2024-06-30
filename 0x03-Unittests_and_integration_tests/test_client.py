@@ -74,3 +74,11 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         valid_op = GithubOrgClient('google')
         self.assertEqual(valid_op.org, self.org_payload)
         self.assertEqual(valid_op.repos, self.expected_repos)
+
+    def test_public_repos_with_license(self):
+        """ This method shall test public_repos with license """
+        self.mock_get.return_value.json.side_effect = [self.org_payload,
+                                                       self.repos_payload]
+        valid_op = GithubOrgClient('google')
+        self.assertEqual(valid_op.org, self.org_payload)
+        self.assertEqual(valid_op.repos, self.apache2_repos)
