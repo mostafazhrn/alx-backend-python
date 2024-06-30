@@ -12,7 +12,7 @@ class TestGithubOrgClient(unittest.TestCase):
     """ This instance shall rep a class for testin test_client.py """
     @parameterized.expand([
         ("google"),
-        ("abc")
+        ("abc"),
         ])
     @patch('client.get_json', return_value={"payload": True})
     def test_org(self, org_name, mock_get_json):
