@@ -20,4 +20,4 @@ class TestGithubOrgClient(unittest.TestCase):
         valid_op = GithubOrgClient(org_name)
         return_res = valid_op.org
         self.assertEqual(return_res, mock_get_json.return_value)
-        mock_get_json.assert_called_once()
+        mock_get_json.assert_called_once
