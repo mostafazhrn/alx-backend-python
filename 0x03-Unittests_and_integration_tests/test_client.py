@@ -77,8 +77,11 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
 
     def test_public_repos_with_license(self):
         """ This method shall test public_repos with license """
-        self.mock_get.return_value.json.side_effect = [self.org_payload,
-                                                       self.repos_payload]
-        valid_op = GithubOrgClient('google')
-        self.assertEqual(valid_op.org, self.org_payload)
-        self.assertEqual(valid_op.repos, self.apache2_repos)
+        x = GithubOrgClient('y')
+        self.assertEqual(x.org, self.org_payload)
+        self.assertEqual(x.repos_payload, self.repos_payload)
+        self.assertEqual(x.public_repos(), self.expected_repos)
+        self.assertEqual(x.public_repos('apache-2.0'), self.apache2_repos)
+        self.assertEqual(x.public_repos('NONEXISTENT'), [])
+        self.get.assert_has_calls([call('https://api.github.com/orgs/y'),
+                                   call(self.org_payload['repos_url'])])
