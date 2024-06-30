@@ -21,3 +21,11 @@ class TestGithubOrgClient(unittest.TestCase):
         return_res = valid_op.org
         self.assertEqual(return_res, mock_get_json.return_value)
         mock_get_json.assert_called_once
+
+    def test_public_repos_url(self):
+        """ This method shall be the test public_repos_url """
+        with patch('client.GithubOrgClient._public_repos_url',
+                   new_callable=PropertyMock) as mock_pub:
+            mock_pub.return_value = TEST_PAYLOAD
+            valid_op = GithubOrgClient('google')
+            self.assertEqual(valid_op._public_repos_url, TEST_PAYLOAD)
