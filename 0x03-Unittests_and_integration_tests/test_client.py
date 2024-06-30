@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """ This script is a unitest module for testing utils.py """
 import unittest
-from parameterized import parameterized
 from client import GithubOrgClient
-from unittest.mock import patch, Mock, PropertyMock
 from fixtures import TEST_PAYLOAD
+from parameterized import parameterized
+from unittest.mock import patch, Mock, PropertyMock
 from urllib.error import HTTPError
 
 
