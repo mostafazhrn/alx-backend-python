@@ -46,3 +46,31 @@ class TestGithubOrgClient(unittest.TestCase):
     def test_has_license(self, repo, license, expected):
         """ this instance shall test has_license """
         self.assertEqual(GithubOrgClient.has_license(repo, license), expected)
+
+
+@parameterized_class(('org_payload', 'repos_payload',
+                      'expected_repos', 'apache2_repos'), [
+    (org_payload, repos_payload, expected_repos,
+     apache2_repos) for org_payload, repos_payload,
+    expected_repos, apache2_repos in TEST_PAYLOAD
+])
+class TestIntegrationGithubOrgClient(unittest.TestCase):
+    """ This instance shall rep class for testing integration GithubClient"""
+    @classmethod
+    def setUpClass(cls):
+        """ This method shall set up the class """
+        cls.get_patcher = patch('requests.get')
+        cls.mock_get = cls.get_patcher.start()
+
+    @classmethod
+    def tearDownClass(cls):
+        """ This method shall tear down the class """
+        cls.get_patcher.stop()
+
+    def test_public_repos(self):
+        """ This method shall test public_repos """
+        self.mock_get.return_value.json.side_effect = [self.org_payload,
+                                                       self.repos_payload]
+        valid_op = GithubOrgClient('google')
+        self.assertEqual(valid_op.org, self.org_payload)
+        self.assertEqual(valid_op.repos, self.expected_repos)
